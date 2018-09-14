@@ -18,13 +18,12 @@ BODY
   savings: 500000,
   
   //Investment Strategy
-  // 0) all cash
-  // 1) 80% AGG / 20% SPY
-  // 2) 60% AGG / 40% SPY
+  // 1) all cash
+  // 2) 80% AGG / 20% SPY
   // 3) 40% AGG / 60% SPY
   // 4) 20% AGG / 80% SPY
   // 5) 0% AGG / 100% SPY 
-  strategy: 3,
+  strategy: 2,
   
   //Retirement Age
   retire: 65,
