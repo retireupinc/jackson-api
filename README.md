@@ -3,7 +3,7 @@
 ## Base URL https://pro-uat.retireup.com/jackson
 
 ## /plan `POST`
-Creates a plan and generates a plan outcome.  Responds with id of the plan outcome.
+Creates a plan and generates a plan outcome.  Responds with id of the plan outcome.  Use this id to retreive the outcome via GET.
 
 BODY
 ``` 
@@ -35,29 +35,61 @@ BODY
 
 EXAMPLE
 ```
-curl -d '{"age":"50", "savings":"700000", "strategy":"1", "retire": "65", annuity}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
+curl -d '{"age":"50", "savings":"700000", "strategy":"1", "retire": "65"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
 ```
 
 ## /plan/:id `GET`
-Retrieves a plan outcome with breaks at 0%, 25%, 50%, 75% invested in an annuity.
+Retrieves a plan outcome with runs at 0%, 25%, 50%, 75% invested in the annuity.
 
 Response BODY
 ``` 
+input: {}, //input plan parameters
+results: [
+  {
+    //Percentage of savings invested in annnuity
+    moved: 50
+
+    //Plan Probability 0-99
+    success: 50,
+
+    //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
+    isr: 88
+
+    //Legacy.  Amount of money passed on after the plan on the median run
+    legacy: 55468,
+
+  }
+]
+```
+
+EXAMPLE
+```
+curl https://pro-uat.retireup.com/jackson/plan/###
+```
+
+## /annuity POST
+Creates annuity for use in plan with parameters created.  Responds with id of the annuity which can be used as input to a plan.
+
+BODY
+``` 
 {
-  //Invested amount in annnuity
-  annuity: 50
+  //Description
+  description: "Jackson Perspective Advisory II®",
   
-  //Plan Probability 0-99
-  probability: 50,
+  //Living Benefit Rider Gauranteed Credit
+  credit: 5
   
-  //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
-  ISR: 88
+  //Living Benefit Rider Credit Interest Type (compound, simple)
+  interest: "compound"
   
-  //First Year Income Stability.  Income stability ratio on the first year in retirement for the median run.
-  ISR1: 90
+  //Living Benefit Rider withdrawal percent
+  withdraw: 7,
   
-  //Legacy.  Amount of money passed on after the plan on the median run
-  legacy: 500000,
+  //Rider Fee
+  riderFee: 0.9,
+  
+  //M & E Fee
+  meFee: 0,
   
 }
 ```
