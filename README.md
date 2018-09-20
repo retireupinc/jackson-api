@@ -2,6 +2,32 @@
 # Jackson API Documentation
 ## Base URL https://pro-uat.retireup.com/jackson
 
+## /access `POST`
+Exchanges an API key for a short-lived Bearer token.
+
+BODY
+``` 
+{
+  //API key that grants access to API host from caller's IP address
+  key: "R20R07649282R48R5"
+}
+```
+
+EXAMPLE
+```
+curl -d '{"key":"R20R07649282R48R5"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/access
+```
+
+RESPONSE
+```
+{"ok":true,"token":"eyJhbGciOi...buR4uHKM0Be0"}
+```
+
+Then, for all other API calls, include the Authorization header with the Bearer token 
+```
+curl -H 'Authorization: Bearer eyJhbGciOi...buR4uHKM0Be0' https://pro-uat.retireup.com/jackson/plan/###
+```
+
 ## /plan `POST`
 Creates a plan and generates a plan outcome.  Responds with id of the plan outcome.  Use this id to retreive the outcome via GET.
 
@@ -41,33 +67,35 @@ curl -d '{"age":"50", "savings":"700000", "strategy":"1", "retire": "65"}' -H "C
 ## /plan/:id `GET`
 Retrieves a plan outcome with runs at 0%, 25%, 50%, 75% invested in the annuity.
 
-Response BODY
-``` 
-input: {}, //input plan parameters
-results: [
-  {
-    //Percentage of savings invested in annnuity
-    moved: 50
-
-    //Plan Probability 0-99
-    success: 50,
-
-    //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
-    isr: 88
-
-    //Legacy.  Amount of money passed on after the plan on the median run
-    legacy: 55468,
-
-  }
-]
-```
-
 EXAMPLE
 ```
-curl https://pro-uat.retireup.com/jackson/plan/###
+curl -H "Content-Type: application/json" https://pro-uat.retireup.com/jackson/plan/###
 ```
 
-## /annuity POST
+RESPONSE
+```
+{
+  input: {}, //input plan parameters
+  results: [
+    {
+      //Percentage of savings invested in annnuity
+      moved: 50
+
+      //Plan Probability 0-99
+      success: 50,
+
+      //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
+      isr: 88
+
+      //Legacy.  Amount of money passed on after the plan on the median run
+      legacy: 55468,
+
+    }
+  ]
+}
+```
+
+## /annuity `POST`
 Creates annuity for use in plan with parameters created.  Responds with id of the annuity which can be used as input to a plan.
 
 BODY
