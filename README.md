@@ -34,38 +34,56 @@ Creates a plan and generates a plan outcome.  Responds with id of the plan outco
 BODY
 ``` 
 {
-  //Age of the person
+  //Age of the person.
+  //Defaults to 50 if non-number or nothing entered.
   age: 50,
   
-  //Current Annual Salary.  Defaults to 60k if not entered.
+  //Current Annual Salary. Drives Social Security Estimate
+  //Defaults to 60k if non-number or nothing entered
   salary: 100000
   
-  //Amount of total savings.  The calculation assumes this money is in a qualified account, like an IRA or 401k
-  savings: 500000,
+  //Annual Retirement Income Need.  Inflated by 2.5% yearly.
+  //Defaults to 60k if non-number or nothing entered
+  income: 80000
   
-  //Investment Strategy
-  // 1) all cash
-  // 2) 80% AGG / 20% SPY
-  // 3) 40% AGG / 60% SPY
-  // 4) 20% AGG / 80% SPY
-  // 5) 0% AGG / 100% SPY 
-  strategy: 2,
+  //Amount of total non qualified savings.  Investment defaulted to 50/50 - SPY/AGG
+  //Defaults to 100k if non-number or nothing entered
+  nqSavings: 500000,
+  
+  //Amount of total qualified savings. Investment defaulted to 50/50 - SPY/AGG
+  //Defaults to 500k if non-number or nothing entered
+  qSavings: 500000
+  
+  //Non Qual Annuity Percentage 0 - 100
+  //Percentage of Non Qual savings moved to Annuity
+  //Defaults to 0 if non-number or nothing entered. 
+  //All input rounded to nearest integer and constrained to 0-100
+  nqAnnuity: 50
+  
+  //Qual Annuity Percentage 0 - 100
+  //Percentage of Qual savings moved to Annuity
+  //Defaults to 0 if non-number or nothing entered. 
+  //All input rounded to nearest integer and constrained to 0-100
+  qAnnuity: 50
   
   //Retirement Age
+  //Defaults to 65 if non-number or nothing entered
   retire: 65,
   
-  //Annuity parameters used.  Created via /annuity POST.  If not entered defaults to annuity with 7% compound rollup and 5% withdrawal.
-  annuity: ###
+  //Annuity used.
+  // 1 - PAII with Lifeguard Freedom Flex with 7% bonus and Income Max; 80/20 asset allocation
+  // 2 - PAII with Lifeguard Freedom Flex with 5% bonus and Income Max; 80/20 asset allocation
+  annuity: 1
 }
 ```
 
 EXAMPLE
 ```
-curl -d '{"age":"50", "savings":"700000", "strategy":"1", "retire": "65"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
+curl -d '{"age":"50", "qSavings":"700000", "retire": "65"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
 ```
 
 ## /plan/:id `GET`
-Retrieves a plan outcome with runs at 0%, 25%, 50%, 75% invested in the annuity.
+Retrieves a plan outcome.
 
 EXAMPLE
 ```
@@ -92,32 +110,5 @@ RESPONSE
 
     }
   ]
-}
-```
-
-## /annuity `POST`
-Creates annuity for use in plan with parameters created.  Responds with id of the annuity which can be used as input to a plan.
-
-BODY
-``` 
-{
-  //Description
-  description: "Jackson Perspective Advisory II®",
-  
-  //Living Benefit Rider Gauranteed Credit
-  credit: 5
-  
-  //Living Benefit Rider Credit Interest Type (compound, simple)
-  interest: "compound"
-  
-  //Living Benefit Rider withdrawal percent
-  withdraw: 7,
-  
-  //Rider Fee
-  riderFee: 0.9,
-  
-  //M & E Fee
-  meFee: 0,
-  
 }
 ```
