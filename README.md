@@ -94,10 +94,8 @@ RESPONSE
 ```
 {
   input: {}, //input plan parameters
-  results: [
+  result: 
     {
-      //Percentage of savings invested in annnuity
-      moved: 50
 
       //Plan Probability 0-99
       success: 50,
@@ -107,6 +105,14 @@ RESPONSE
 
       //Legacy.  Amount of money passed on after the plan on the median run
       legacy: 55468,
+      
+      //detailed results from the median run
+      median: {
+        age:[] //age of the person
+        annuity:[] //income from annuity
+        nonAnnuity:[] //income from non annuity sources (social security, IRA, savings)
+        short:[] //amount short of income need
+      }
 
     }
   ]
