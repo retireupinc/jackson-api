@@ -99,15 +99,31 @@ RESPONSE
 
       //Plan Probability 0-99
       success: 50,
-
-      //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
-      isr: 88
-
-      //Legacy.  Amount of money passed on after the plan on the median run
-      legacy: 55468,
       
       //detailed results from the median run
       median: {
+      
+        //Income Stability.  This represents the income stability ratio of the entire plan on the median run.
+        isr: 88
+
+        //Legacy.  Amount of money passed on after the plan on the median run
+        legacy: 55468,
+
+        age:[] //age of the person
+        annuity:[] //income from annuity
+        nonAnnuity:[] //income from non annuity sources (social security, IRA, savings)
+        short:[] //amount short of income need
+      },
+      
+     //detailed results from the bad timing run, 10% quantile of the monte carlo runs
+      low: {
+      
+        //Income Stability.  This represents the income stability ratio of the entire plan on the low run.
+        isr: 88
+
+        //Legacy.  Amount of money passed on after the plan on the low run
+        legacy: 55468,
+
         age:[] //age of the person
         annuity:[] //income from annuity
         nonAnnuity:[] //income from non annuity sources (social security, IRA, savings)
