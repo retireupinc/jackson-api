@@ -29,7 +29,7 @@ curl -H 'Authorization: Bearer eyJhbGciOi...buR4uHKM0Be0' https://pro-uat.retire
 ```
 
 ## /plan `POST`
-Creates a plan and generates a plan outcome.  Responds with id of the plan outcome.  Use this id to retreive the outcome via GET.
+Creates a plan and generates a plan outcome.  Responds with id of the plan outcome, as well as the outcome.  Use the id if you like to retreive the outcome via GET.  Or simply use the outcome returned from this POST
 
 BODY
 ``` 
@@ -80,6 +80,10 @@ BODY
 EXAMPLE
 ```
 curl -d '{"age":"50", "qSavings":"700000", "retire": "65"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
+```
+RESPONSE
+```
+{"ok":true,"id":"###",input:{},result:{} //see GET documentation for shape of the input and result.
 ```
 
 ## /plan/:id `GET`
