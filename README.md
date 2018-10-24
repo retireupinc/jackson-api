@@ -81,24 +81,13 @@ EXAMPLE
 ```
 curl -d '{"age":"50", "qSavings":"700000", "retire": "65"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/plan
 ```
-RESPONSE
-```
-{"ok":true,"id":"###",input:{},result:{} //see GET documentation for shape of the input and result.
-```
-
-## /plan/:id `GET`
-Retrieves a plan outcome.
-
-EXAMPLE
-```
-curl -H "Content-Type: application/json" https://pro-uat.retireup.com/jackson/plan/###
-```
 
 RESPONSE
 ```
 {
-  input: {}, //input plan parameters
+  input: [{},{}] //input plan parameters
   result: 
+  [
     {
 
       //Plan Probability 0-99
@@ -134,6 +123,7 @@ RESPONSE
         short:[] //amount short of income need
       }
 
-    }
+    },
+    {//result running api with nqAnnuity = 0 and qAnnuity = 0}
 }
 ```
