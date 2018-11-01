@@ -35,44 +35,49 @@ BODY
 ``` 
 {
   //Age of the person.
-  //Defaults to 50 if non-number or nothing entered.
-  age: 50,
+  //Defaults to 55 if non-number or nothing entered.
+  //Only Valid values are 45,55,65.  Everything else throws 422.
+  age: 55,
   
   //Current Annual Salary. Drives Social Security Estimate
   //Defaults to 60k if non-number or nothing entered
+  //Only Valid values are 0-200,000.  Everything else throws 422.
   salary: 100000
   
-  //Annual Retirement Income Need.  Inflated by 2.5% yearly.
+  //Annual Retirement Income Need.  Inflated by 2.25% yearly.
   //Defaults to 60k if non-number or nothing entered
+  //Only Valid values are 30k - 120k.  Everything else throws 422.
   income: 80000
   
   //Amount of total non qualified savings.  Investment defaulted to 50/50 - SPY/AGG
   //Defaults to 100k if non-number or nothing entered
+  //Only Valid values are 0 - 1.5M.  Everything else throws 422.
   nqSavings: 500000,
   
   //Amount of total qualified savings. Investment defaulted to 50/50 - SPY/AGG
   //Defaults to 500k if non-number or nothing entered
+  //Only Valid values are 0 - 1.5M.  Everything else throws 422.
   qSavings: 500000
   
   //Non Qual Annuity Percentage 0 - 100
   //Percentage of Non Qual savings moved to Annuity
   //Defaults to 0 if non-number or nothing entered. 
-  //All input rounded to nearest integer and constrained to 0-100
+  //Only Valid values are 0 - 100.  Everything else throws 422.
   nqAnnuity: 50
   
   //Qual Annuity Percentage 0 - 100
   //Percentage of Qual savings moved to Annuity
   //Defaults to 0 if non-number or nothing entered. 
-  //All input rounded to nearest integer and constrained to 0-100
+  //Only Valid values are 0 - 100.  Everything else throws 422.
   qAnnuity: 50
   
   //Retirement Age
-  //Defaults to 65 if non-number or nothing entered
+  //Always defaults to 65 no matter what is entered.
   retire: 65,
   
   //Annuity used.
   // 1 - PAII with Lifeguard Freedom Flex with 7% bonus and Income Max; 80/20 asset allocation
-  // 2 - PAII with Lifeguard Freedom Flex with 5% bonus and Income Max; 80/20 asset allocation
+  //Always defaults to 1 no matter what is entered.  #2 no longer used.
   annuity: 1
 }
 ```
