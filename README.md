@@ -9,23 +9,23 @@ BODY
 ``` 
 {
   //API key that grants access to API host from caller's IP address
-  key: "R20R07649282R48R5"
+  key: "ABCD123"
 }
 ```
 
 EXAMPLE
 ```
-curl -d '{"key":"R20R07649282R48R5"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/access
+curl -d '{"key":"ABCD123"}' -H "Content-Type: application/json" -X POST https://pro-uat.retireup.com/jackson/access
 ```
 
 RESPONSE
 ```
-{"ok":true,"token":"eyJhbGciOi...buR4uHKM0Be0"}
+{"ok":true,"token":"efghi...jklmno"}
 ```
 
 Then, for all other API calls, include the Authorization header with the Bearer token 
 ```
-curl -H 'Authorization: Bearer eyJhbGciOi...buR4uHKM0Be0' https://pro-uat.retireup.com/jackson/plan/###
+curl -H 'Authorization: Bearer efghi...jklmno' https://pro-uat.retireup.com/jackson/plan/###
 ```
 
 ## /plan `POST`
